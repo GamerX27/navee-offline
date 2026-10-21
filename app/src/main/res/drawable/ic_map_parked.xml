@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Map pin with a "P" for the parked scooter. -->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="44dp"
+    android:viewportWidth="36"
+    android:viewportHeight="44">
+    <path
+        android:fillColor="#FFD93B3B"
+        android:strokeColor="#FFFFFFFF"
+        android:strokeWidth="2"
+        android:pathData="M18,2 C9.2,2 2,9 2,17.6 C2,29 18,42 18,42 C18,42 34,29 34,17.6 C34,9 26.8,2 18,2 Z" />
+    <path
+        android:fillColor="#FFFFFFFF"
+        android:pathData="M13,9 L19.5,9 C23,9 25.5,11.4 25.5,14.6 C25.5,17.8 23,20.2 19.5,20.2 L16.4,20.2 L16.4,26 L13,26 Z M16.4,12 L16.4,17.2 L19.3,17.2 C21,17.2 22,16.2 22,14.6 C22,13 21,12 19.3,12 Z" />
+</vector>

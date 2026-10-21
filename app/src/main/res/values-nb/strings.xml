@@ -1,0 +1,316 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Faner og navigasjon -->
+    <string name="tab_ride">Tur</string>
+    <string name="tab_map">Kart</string>
+    <string name="tab_settings">Innstillinger</string>
+    <string name="back">Tilbake</string>
+    <string name="help">Hjelp</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Avbryt</string>
+    <string name="close">Lukk</string>
+    <string name="delete">Slett</string>
+    <string name="stop">Stopp</string>
+    <string name="grant">Tillat</string>
+
+    <!-- Tilkobling -->
+    <string name="scooter">Sparkesykkel</string>
+    <string name="connect">Koble til</string>
+    <string name="disconnect">Koble fra</string>
+    <string name="connected">Tilkoblet</string>
+    <string name="connecting">Kobler til …</string>
+    <string name="connecting_short">Kobler til</string>
+    <string name="offline">Frakoblet</string>
+    <string name="not_connected">Ikke tilkoblet</string>
+    <string name="not_a_scooter">Ikke en sparkesykkel</string>
+    <string name="find_scooter">Finn sparkesykkel</string>
+    <string name="connect_title">Koble til sparkesykkel</string>
+    <string name="connect_hint">Slå på sparkesykkelen og hold telefonen nær. Den vises som «NAVEE…».</string>
+    <string name="show_all_devices">Vis alle Bluetooth-enheter</string>
+    <string name="not_a_scooter_long">Den enheten er ikke en NAVEE-sparkesykkel.</string>
+    <string name="unknown_device">Ukjent enhet</string>
+    <string name="bt_off">Bluetooth er av.</string>
+    <string name="bt_turn_on">Slå på Bluetooth</string>
+
+    <!-- Tur -->
+    <string name="ride_need_bluetooth">Tillat Bluetooth så appen finner sparkesykkelen. Ingenting forlater telefonen.</string>
+    <string name="ride_no_scooter">Ingen sparkesykkel ennå</string>
+    <string name="ride_out_of_range">Utenfor rekkevidde, prøver igjen …</string>
+    <string name="ride_rejected">Sparkesykkelen avviste denne telefonen. Den er paret med en annen telefon eller NAVEE-appen og legger på etter ca. 10 s. Importer en paringsfil (Innstillinger → Paring) eller fjern paringen der.</string>
+    <string name="battery">batteri</string>
+    <string name="charging">Lader</string>
+    <string name="lock">Lås</string>
+    <string name="unlock">Lås opp</string>
+    <string name="locked">Låst</string>
+    <string name="unlocked">Ulåst</string>
+    <string name="stop_to_lock">Stopp for å låse</string>
+    <string name="chip_light">Lys</string>
+    <string name="range_left">Rekkevidde</string>
+    <string name="trip">Tur</string>
+    <string name="odometer">Kilometerteller</string>
+    <string name="all_controls">Alle kontroller</string>
+    <string name="scooter_info">Om sparkesykkelen</string>
+    <string name="record_trip">Ta opp tur</string>
+    <string name="stop_trip">Avslutt tur</string>
+    <string name="recording">Tar opp …</string>
+    <string name="recording_since">Tar opp siden %1$s</string>
+    <string name="distance">Distanse</string>
+    <string name="avg">Snitt</string>
+    <string name="energy">Energi</string>
+
+    <!-- Kontroller -->
+    <string name="controls_connect_first">Koble til for å endre innstillingene.</string>
+    <string name="controls_hint">Bryterne viser det sparkesykkelen melder. Mangler modellen en innstilling, slår den seg tilbake.</string>
+    <string name="section_riding">Kjøring</string>
+    <string name="section_lights">Lys</string>
+    <string name="lock_sub">Sperrer motoren. Bare når den står stille.</string>
+    <string name="drive_mode">Kjøremodus</string>
+    <string name="mode_normal">Normal</string>
+    <string name="mode_turbo">Turbo</string>
+    <string name="cruise">Cruise</string>
+    <string name="cruise_help">Hold gassen jevn i noen sekunder, så holder sparkesykkelen farten til du bremser eller rører gassen.</string>
+    <string name="tcs">Antispinn</string>
+    <string name="tcs_help">Begrenser hjulspinn når du akselererer på vått eller løst underlag.</string>
+    <string name="eco">Eco</string>
+    <string name="eco_help">Mykere akselerasjon for lengre rekkevidde.</string>
+    <string name="kick_start">Startfart</string>
+    <string name="kick_start_sub">Spark opp til denne farten før motoren starter (km/h).</string>
+    <string name="kick_start_zero">Null</string>
+    <string name="kick_start_help">Utenfor US-regionen godtar sparkesykkelen bare 3 til 5 km/h, så lavere verdier er skjult. «Null» lar motoren starte fra stillestående.</string>
+    <string name="auto_light">Automatisk frontlys</string>
+    <string name="auto_light_sub">På mens du kjører</string>
+    <string name="drl">Kjørelys</string>
+    <string name="tail_light">Baklys</string>
+    <string name="logo_light">Logolys</string>
+    <string name="ambient_light">Stemningslys</string>
+    <string name="ambient_light_sub">Undergløding, på modeller som har det</string>
+
+    <!-- Om sparkesykkelen -->
+    <string name="section_battery">Batteri</string>
+    <string name="section_faults">Feil</string>
+    <string name="section_identity">Identitet</string>
+    <string name="section_firmware">Fastvare</string>
+    <string name="section_connection">Tilkobling</string>
+    <string name="charge">Lading</string>
+    <string name="voltage">Spenning</string>
+    <string name="current">Strøm</string>
+    <string name="power">Effekt</string>
+    <string name="health">Helse (SOH)</string>
+    <string name="temperature">Temperatur</string>
+    <string name="cycles">Ladesykluser</string>
+    <string name="fault_not_reported">Ikke meldt ennå</string>
+    <string name="fault_none">Ingen aktiv feil</string>
+    <string name="fault_unknown">Ukjent feilkode %1$d</string>
+    <string name="fault_not_in_table">Ikke i NAVEEs feiltabell, vist slik den kom.</string>
+    <string name="fault_all_codes">Alle feilkoder</string>
+    <string name="bt_name">Bluetooth-navn</string>
+    <string name="address">Adresse</string>
+    <string name="model">Modell</string>
+    <string name="model_unknown">Ukjent (%1$s)</string>
+    <string name="serial">Serienummer</string>
+    <string name="region">Region</string>
+    <string name="fw_meter">Display</string>
+    <string name="fw_controller">Kontroller</string>
+    <string name="fw_bms">Batteri (BMS)</string>
+    <string name="fw_screen">Skjerm</string>
+    <string name="state">Status</string>
+    <string name="signal">Signal</string>
+    <string name="live_reports">Direktedata</string>
+    <string name="streaming">Strømmer</string>
+    <string name="polling_only">Bare spørring</string>
+    <string name="max_speed_param">Toppfart-innstilling</string>
+
+    <!-- Feiltekster etter NAVEE-feilnummer -->
+    <string name="fault_10">Display og kontroller får ikke kontakt</string>
+    <string name="fault_11">Overstrøm i kontrolleren</string>
+    <string name="fault_12">Feil i strømmåling i kontrolleren</string>
+    <string name="fault_14">Gassfeil</string>
+    <string name="fault_15">Feil på bremsehendel</string>
+    <string name="fault_18">Feil på motorens Hall-sensor</string>
+    <string name="fault_21">Kontroller og batteri får ikke kontakt</string>
+    <string name="fault_24">Overspenning i batteriet</string>
+    <string name="fault_28">Feil på MOSFET i kontrolleren (øvre)</string>
+    <string name="fault_29">Feil på MOSFET i kontrolleren (nedre)</string>
+    <string name="fault_39">Batteriets temperaturføler er kortsluttet eller brutt</string>
+    <string name="fault_40">Feil på kontrollerens temperaturføler</string>
+    <string name="fault_43">Gyroskopfeil</string>
+    <string name="fault_45">Kontrolleren er overopphetet</string>
+    <string name="fault_50">Batteriets temperaturfølere er uenige</string>
+    <string name="fault_52">Batteriets AFE får ikke kontakt</string>
+    <string name="fault_53">For stor forskjell mellom cellespenningene</string>
+    <string name="fault_54">For varmt til å lade</string>
+    <string name="fault_55">For kaldt til å lade</string>
+    <string name="fault_56">For varmt til å kjøre</string>
+    <string name="fault_57">For kaldt til å kjøre</string>
+    <string name="fault_60">Batteriet er overladet</string>
+    <string name="fault_61">Batteriet er dyputladet</string>
+
+    <!-- Kart / tidslinje -->
+    <string name="today">I dag</string>
+    <string name="yesterday">I går</string>
+    <string name="all">Alle</string>
+    <string name="all_trips">Alle turer</string>
+    <string name="previous_day">Forrige dag</string>
+    <string name="next_day">Neste dag</string>
+    <string name="fit_day">Vis alle spor</string>
+    <string name="my_position">Min posisjon</string>
+    <string name="open_trip">Åpne tur</string>
+    <string name="no_trips_day">Ingen turer denne dagen.</string>
+    <string name="day_summary">%1$s · %2$s · %3$s</string>
+    <plurals name="trips">
+        <item quantity="one">%d tur</item>
+        <item quantity="other">%d turer</item>
+    </plurals>
+    <string name="map_no_file">Ingen offlinekart ennå. Importer ett i Innstillinger</string>
+    <string name="map_location_off">Posisjon er av. Slå den på i Innstillinger</string>
+    <string name="map_need_permission">Trenger tillatelse til posisjon</string>
+    <string name="map_waiting_gps">Venter på GPS …</string>
+    <string name="map_gps_off">GPS er av</string>
+    <string name="map_last_fix">Siste GPS-posisjon · ±%1$d m · %2$s</string>
+    <string name="map_approximate">Omtrentlig (Wi‑Fi/mobil) · ±%1$d m · %2$s</string>
+    <string name="parked_none">Ingen parkeringsplass lagret ennå</string>
+    <string name="parked_locked">Låst her %1$s</string>
+    <string name="parked_last_seen">Sist sett her %1$s</string>
+    <string name="parked_here">Parkert her %1$s</string>
+    <string name="parked_here_button">Parkert her</string>
+    <string name="find_by_signal">Finn med signal</string>
+    <string name="direction">Retning</string>
+    <string name="listening">Lytter etter sparkesykkelen … (den må være på)</string>
+    <string name="signal_strength">Signal %1$d dBm · %2$s</string>
+    <string name="very_close">veldig nær</string>
+    <string name="near">nær</string>
+    <string name="far">langt unna</string>
+
+    <!-- Turdetaljer -->
+    <string name="export_gpx">Eksporter GPX</string>
+    <string name="gpx_saved">GPX lagret</string>
+    <string name="export_failed">Eksport mislyktes</string>
+    <string name="duration">Varighet</string>
+    <string name="avg_speed">Snittfart</string>
+    <string name="max_speed">Toppfart</string>
+    <string name="consumption">Forbruk</string>
+    <string name="battery_used">Batteri brukt</string>
+    <string name="points">Punkter</string>
+    <string name="speed">Fart</string>
+    <string name="battery_chart">Batteri</string>
+    <string name="altitude">Høyde</string>
+    <string name="chart_max">%1$s · maks %2$s</string>
+    <string name="delete_trip_q">Slette turen?</string>
+    <string name="delete_trip_text">Turen og sporet fjernes fra denne telefonen.</string>
+
+    <!-- Innstillinger -->
+    <string name="language_system">System</string>
+    <string name="section_scooter">Sparkesykkel</string>
+    <string name="no_scooter">Ingen sparkesykkel</string>
+    <string name="no_scooter_sub">Finn din, eller importer en paringsfil</string>
+    <string name="other_scooter">Annen …</string>
+    <string name="forget">Glem</string>
+    <string name="forget_q">Glemme sparkesykkelen?</string>
+    <string name="forget_text">Kobler fra og slutter å koble til igjen. Turene beholdes.</string>
+    <string name="auto_reconnect">Koble til automatisk</string>
+    <string name="auto_reconnect_sub">Når appen åpnes eller forbindelsen faller ut</string>
+    <string name="auto_lock">Autolås</string>
+    <string name="auto_lock_sub">Lås når du går fra den</string>
+    <string name="auto_lock_help">Låser sparkesykkelen én gang når den har stått stille i 30 s og Bluetooth-signalet blir svakt. Den låser aldri mens sparkesykkelen er i bevegelse, og varselet har en Lås opp-knapp. Signalet varierer med vegger og lommer, så den kan låse litt tidlig eller sent. Det er ikke tyverisikring.</string>
+    <string name="auto_lock_distance">Lås ved</string>
+    <string name="range_near">Nær</string>
+    <string name="range_medium">Middels</string>
+    <string name="range_far">Langt</string>
+
+    <string name="section_location">Posisjon</string>
+    <string name="location_features">Posisjonsfunksjoner</string>
+    <string name="location_off_sub">Av. Ingen GPS, ingen posisjon på kartet, ingen spor.</string>
+    <string name="location_on_sub">Turspor, posisjon på kartet og parkeringsplass</string>
+    <string name="location_help">Når dette er på, bruker appen GPS mens den er åpen eller tilkoblet, for å tegne turspor, vise hvor du er og huske hvor du parkerte. Alt blir på denne telefonen. Når det er av, logges turer fortsatt med sparkesykkelens egen kilometerteller, uten spor på kartet.</string>
+    <string name="location_denied">Fikk ikke tillatelse til posisjon</string>
+    <string name="auto_record">Ta opp turer automatisk</string>
+    <string name="auto_record_sub">Når du kjører mens den er tilkoblet</string>
+    <string name="auto_record_sub_no_location">Når du kjører mens den er tilkoblet (bare distanse)</string>
+    <string name="idle_stop">Avslutt tur etter stillstand</string>
+    <string name="gps_interval">GPS-intervall</string>
+    <string name="park_on_lock">Lagre parkeringsplass ved låsing</string>
+    <string name="park_on_lock_sub">Fester sparkesykkelen på kartet til du låser opp</string>
+    <string name="network_location">Wi‑Fi/mobilposisjon innendørs</string>
+    <string name="network_location_sub">Bare kart og parkeringsplass</string>
+    <string name="network_location_help">Når GPS ikke har posisjon, kan telefonens egen posisjonstjeneste hjelpe. Den tjenesten kan kontakte Google. Turspor bruker alltid bare GPS.</string>
+
+    <string name="section_look">Enheter og utseende</string>
+    <string name="units">Enheter</string>
+    <string name="units_sub">I appen og på sparkesykkelen</string>
+    <string name="theme">Tema</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Lyst</string>
+    <string name="theme_dark">Mørkt</string>
+    <string name="dynamic_color">Material You-farger</string>
+    <string name="dynamic_color_sub">Farger fra bakgrunnsbildet</string>
+    <string name="dark_map">Mørkt kart</string>
+
+    <string name="section_maps">Offlinekart</string>
+    <string name="maps_hint">Mapsforge .map-filer (OpenStreetMap)</string>
+    <string name="maps_help">Last ned en .map-fil for ditt område på en datamaskin eller i en nettleser, for eksempel fra download.mapsforge.org, og importer den her. Appen selv går aldri på nett.</string>
+    <string name="import_map">Importer .map-fil</string>
+    <string name="map_imported">Importerte %1$s</string>
+    <string name="import_failed">Import mislyktes</string>
+    <string name="delete_map_q">Slette %1$s?</string>
+
+    <string name="section_pairing">Paring</string>
+    <string name="pairing_hint">Flytt paringen til en annen telefon</string>
+    <string name="pairing_help">Sparkesykkelen svarer bare telefonen den er paret med. Paringsfilen lar en annen av telefonene dine bruke samme paring. Eksporter den her, og åpne den med Importer på den andre telefonen. Behandle filen som en nøkkel.</string>
+    <string name="pairing_export">Eksporter fil</string>
+    <string name="pairing_import">Importer fil</string>
+    <string name="pairing_export_q">Eksportere paringsfil?</string>
+    <string name="pairing_export_warning">Denne filen er nøkkelen til sparkesykkelen din. Del den bare med dine egne telefoner, og slett den når den er importert.</string>
+    <string name="pairing_export_go">Eksporter</string>
+    <string name="pairing_saved">Paringsfil lagret</string>
+    <string name="pairing_invalid">Ikke en gyldig paringsfil: %1$s</string>
+    <string name="pairing_import_q">Bruke denne paringen?</string>
+    <string name="pairing_import_text">Sparkesykkel: %1$s\n\nDenne telefonen bruker paringen fra filen i stedet for sin egen. Importer bare filer fra dine egne telefoner.</string>
+    <string name="pairing_import_go">Importer</string>
+    <string name="pairing_imported">Paring importert. Kobler til …</string>
+
+    <string name="section_data">Dine data</string>
+    <string name="data_hint">Turer og parkeringsplass blir på denne telefonen. En sikkerhetskopi er én fil du kan ha hvor du vil.</string>
+    <string name="backup_export">Eksporter kopi</string>
+    <string name="backup_restore">Gjenopprett</string>
+    <string name="backup_saved">Sikkerhetskopi lagret</string>
+    <string name="backup_failed">Sikkerhetskopi mislyktes: %1$s</string>
+    <string name="restore_q">Gjenopprette sikkerhetskopi?</string>
+    <string name="restore_text">Alle turer på denne telefonen erstattes av kopien. Appen starter på nytt etterpå.</string>
+    <string name="restore_failed">Gjenoppretting mislyktes</string>
+
+    <!-- Om -->
+    <string name="about">Om</string>
+    <string name="about_app">Om Navee Offline</string>
+    <string name="about_sub">Lisens, takk og ansvarsfraskrivelse</string>
+    <string name="about_intro">En app med åpen kildekode for NAVEE-sparkesykler. Den snakker med sparkesykkelen over Bluetooth og virker helt offline: ingen konto, ingen sky, ingen analyse, ingen internettillatelse.</string>
+    <string name="about_licence">Lisens</string>
+    <string name="about_licence_text">Fri programvare under GNU General Public License v3.0 eller senere. Du kan bruke, studere, dele og endre den. Endrede versjoner du deler, må ha samme lisens.</string>
+    <string name="about_credits">Takk til</string>
+    <string name="about_credits_maps">Kartvisning: Mapsforge (LGPL-3.0). Kartdata © OpenStreetMap-bidragsytere, under Open Database License (ODbL).</string>
+    <string name="about_credits_protocol">Bluetooth-protokollen ble dokumentert av prosjektet nv-lb-edition av Laufbursche. Denne appen er skrevet uavhengig og inneholder ingen kode derfra.</string>
+    <string name="about_disclaimer">Ansvarsfraskrivelse</string>
+    <string name="about_disclaimer_text">Et uavhengig fellesskapsprosjekt, ikke tilknyttet eller godkjent av NAVEE. «NAVEE» er et varemerke for eieren, brukt bare for å si hvilke sparkesykler appen virker med.</string>
+    <string name="about_warranty">Ingen garanti. Du endrer innstillinger på eget ansvar. Følg trafikkreglene. Appen har ingen fjerning av fartsgrense, endring av region eller flashing av fastvare.</string>
+
+    <!-- Varsler -->
+    <string name="channel_link">Tilkobling til sparkesykkel</string>
+    <string name="channel_alerts">Varsler fra sparkesykkel</string>
+    <string name="notif_connected">%1$s tilkoblet</string>
+    <string name="notif_out_of_range">Sparkesykkelen er utenfor rekkevidde, prøver igjen …</string>
+    <string name="notif_recording">Tar opp tur</string>
+    <string name="notif_trip">Tur %1$s</string>
+    <string name="notif_auto_locked">Låst automatisk</string>
+    <string name="notif_auto_locked_text">Du gikk fra sparkesykkelen, så den ble låst.</string>
+
+    <!-- Tid -->
+    <string name="duration_h_min">%1$d t %2$d min</string>
+    <string name="duration_min">%1$d min</string>
+    <string name="duration_s">%1$d s</string>
+    <string name="ago_now">akkurat nå</string>
+    <string name="ago_min">for %1$d min siden</string>
+    <string name="ago_h">for %1$d t siden</string>
+    <plurals name="ago_days">
+        <item quantity="one">for %d dag siden</item>
+        <item quantity="other">for %d dager siden</item>
+    </plurals>
+</resources>

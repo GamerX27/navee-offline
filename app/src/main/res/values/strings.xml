@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name" translatable="false">Navee Offline</string>
+
+    <!-- Tabs and navigation -->
+    <string name="tab_ride">Ride</string>
+    <string name="tab_map">Map</string>
+    <string name="tab_settings">Settings</string>
+    <string name="back">Back</string>
+    <string name="help">Help</string>
+    <string name="ok">OK</string>
+    <string name="cancel">Cancel</string>
+    <string name="close">Close</string>
+    <string name="delete">Delete</string>
+    <string name="stop">Stop</string>
+    <string name="grant">Allow</string>
+
+    <!-- Connection -->
+    <string name="scooter">Scooter</string>
+    <string name="connect">Connect</string>
+    <string name="disconnect">Disconnect</string>
+    <string name="connected">Connected</string>
+    <string name="connecting">Connecting…</string>
+    <string name="connecting_short">Connecting</string>
+    <string name="offline">Offline</string>
+    <string name="not_connected">Not connected</string>
+    <string name="not_a_scooter">Not a scooter</string>
+    <string name="find_scooter">Find scooter</string>
+    <string name="connect_title">Connect scooter</string>
+    <string name="connect_hint">Turn the scooter on and keep the phone close. It shows up as \"NAVEE…\".</string>
+    <string name="show_all_devices">Show all Bluetooth devices</string>
+    <string name="not_a_scooter_long">That device is not a NAVEE scooter.</string>
+    <string name="unknown_device">Unknown device</string>
+    <string name="bt_off">Bluetooth is off.</string>
+    <string name="bt_turn_on">Turn on Bluetooth</string>
+
+    <!-- Ride -->
+    <string name="ride_need_bluetooth">Allow Bluetooth so the app can find your scooter. Nothing leaves the phone.</string>
+    <string name="ride_no_scooter">No scooter yet</string>
+    <string name="ride_out_of_range">Out of range, retrying…</string>
+    <string name="ride_rejected">The scooter refused this phone. It is paired with another phone or the NAVEE app and hangs up after about 10 s. Import a pairing file (Settings → Pairing) or unpair it there.</string>
+    <string name="battery">battery</string>
+    <string name="charging">Charging</string>
+    <string name="lock">Lock</string>
+    <string name="unlock">Unlock</string>
+    <string name="locked">Locked</string>
+    <string name="unlocked">Unlocked</string>
+    <string name="stop_to_lock">Stop to lock</string>
+    <string name="chip_light">Light</string>
+    <string name="range_left">Range left</string>
+    <string name="trip">Trip</string>
+    <string name="odometer">Odometer</string>
+    <string name="all_controls">All controls</string>
+    <string name="scooter_info">Scooter info</string>
+    <string name="record_trip">Record trip</string>
+    <string name="stop_trip">Stop trip</string>
+    <string name="recording">Recording…</string>
+    <string name="recording_since">Recording since %1$s</string>
+    <string name="distance">Distance</string>
+    <string name="avg">Avg</string>
+    <string name="energy">Energy</string>
+
+    <!-- Controls -->
+    <string name="controls_connect_first">Connect to change the scooter\'s settings.</string>
+    <string name="controls_hint">Switches show what the scooter reports. If your model lacks a setting, it flips back.</string>
+    <string name="section_riding">Riding</string>
+    <string name="section_lights">Lights</string>
+    <string name="lock_sub">Blocks the motor. Only at standstill.</string>
+    <string name="drive_mode">Drive mode</string>
+    <string name="mode_normal">Normal</string>
+    <string name="mode_turbo">Turbo</string>
+    <string name="cruise">Cruise</string>
+    <string name="cruise_help">Hold the throttle steady for a few seconds and the scooter keeps that speed until you brake or touch the throttle.</string>
+    <string name="tcs">Traction control</string>
+    <string name="tcs_help">Limits wheel spin when you accelerate on wet or loose ground.</string>
+    <string name="eco">Eco</string>
+    <string name="eco_help">Softer acceleration for more range.</string>
+    <string name="kick_start">Kick-start speed</string>
+    <string name="kick_start_sub">Push to this speed before the motor starts (km/h).</string>
+    <string name="kick_start_zero">Zero</string>
+    <string name="kick_start_help">Outside the US region the scooter only accepts 3 to 5 km/h, so lower values are hidden. \"Zero\" lets the motor start from standstill.</string>
+    <string name="auto_light">Automatic headlight</string>
+    <string name="auto_light_sub">On while riding</string>
+    <string name="drl">Daytime running light</string>
+    <string name="tail_light">Tail light</string>
+    <string name="logo_light">Logo light</string>
+    <string name="ambient_light">Ambient light</string>
+    <string name="ambient_light_sub">Underglow, on models that have it</string>
+
+    <!-- Scooter info -->
+    <string name="section_battery">Battery</string>
+    <string name="section_faults">Faults</string>
+    <string name="section_identity">Identity</string>
+    <string name="section_firmware">Firmware</string>
+    <string name="section_connection">Connection</string>
+    <string name="charge">Charge</string>
+    <string name="voltage">Voltage</string>
+    <string name="current">Current</string>
+    <string name="power">Power</string>
+    <string name="health">Health (SOH)</string>
+    <string name="temperature">Temperature</string>
+    <string name="cycles">Charge cycles</string>
+    <string name="fault_not_reported">Not reported yet</string>
+    <string name="fault_none">No active fault</string>
+    <string name="fault_unknown">Unknown fault code %1$d</string>
+    <string name="fault_not_in_table">Not in the NAVEE fault table, shown as sent.</string>
+    <string name="fault_all_codes">All fault codes</string>
+    <string name="bt_name">Bluetooth name</string>
+    <string name="address">Address</string>
+    <string name="model">Model</string>
+    <string name="model_unknown">Unknown (%1$s)</string>
+    <string name="serial">Serial</string>
+    <string name="region">Region</string>
+    <string name="fw_meter">Meter</string>
+    <string name="fw_controller">Controller</string>
+    <string name="fw_bms">Battery (BMS)</string>
+    <string name="fw_screen">Screen</string>
+    <string name="state">State</string>
+    <string name="signal">Signal</string>
+    <string name="live_reports">Live reports</string>
+    <string name="streaming">Streaming</string>
+    <string name="polling_only">Polling only</string>
+    <string name="max_speed_param">Max speed setting</string>
+
+    <!-- Fault texts by NAVEE fault number -->
+    <string name="fault_10">Display and controller can\'t talk</string>
+    <string name="fault_11">Controller overcurrent</string>
+    <string name="fault_12">Controller current-sensing fault</string>
+    <string name="fault_14">Throttle fault</string>
+    <string name="fault_15">Brake lever fault</string>
+    <string name="fault_18">Motor Hall-sensor fault</string>
+    <string name="fault_21">Controller and battery can\'t talk</string>
+    <string name="fault_24">Battery overvoltage</string>
+    <string name="fault_28">Controller MOSFET (upper) fault</string>
+    <string name="fault_29">Controller MOSFET (lower) fault</string>
+    <string name="fault_39">Battery temperature sensor short or open</string>
+    <string name="fault_40">Controller temperature-sensor fault</string>
+    <string name="fault_43">Gyroscope fault</string>
+    <string name="fault_45">Controller overheating</string>
+    <string name="fault_50">Battery temperature sensors disagree</string>
+    <string name="fault_52">Battery AFE can\'t talk</string>
+    <string name="fault_53">Cell voltages too far apart</string>
+    <string name="fault_54">Too hot to charge</string>
+    <string name="fault_55">Too cold to charge</string>
+    <string name="fault_56">Too hot to ride</string>
+    <string name="fault_57">Too cold to ride</string>
+    <string name="fault_60">Battery overcharged</string>
+    <string name="fault_61">Battery over-discharged</string>
+
+    <!-- Map / timeline -->
+    <string name="today">Today</string>
+    <string name="yesterday">Yesterday</string>
+    <string name="all">All</string>
+    <string name="all_trips">All trips</string>
+    <string name="previous_day">Previous day</string>
+    <string name="next_day">Next day</string>
+    <string name="fit_day">Fit all tracks</string>
+    <string name="my_position">My position</string>
+    <string name="open_trip">Open trip</string>
+    <string name="no_trips_day">No trips this day.</string>
+    <string name="day_summary">%1$s · %2$s · %3$s</string>
+    <plurals name="trips">
+        <item quantity="one">%d trip</item>
+        <item quantity="other">%d trips</item>
+    </plurals>
+    <string name="map_no_file">No offline map yet. Import one in Settings</string>
+    <string name="map_location_off">Location is off. Turn it on in Settings</string>
+    <string name="map_need_permission">Location permission needed</string>
+    <string name="map_waiting_gps">Waiting for GPS…</string>
+    <string name="map_gps_off">GPS is off</string>
+    <string name="map_last_fix">Last GPS fix · ±%1$d m · %2$s</string>
+    <string name="map_approximate">Approximate (Wi‑Fi/cell) · ±%1$d m · %2$s</string>
+    <string name="parked_none">No parking spot saved yet</string>
+    <string name="parked_locked">Locked here %1$s</string>
+    <string name="parked_last_seen">Last seen here %1$s</string>
+    <string name="parked_here">Parked here %1$s</string>
+    <string name="parked_here_button">Parked here</string>
+    <string name="find_by_signal">Find by signal</string>
+    <string name="direction">Direction</string>
+    <string name="listening">Listening for the scooter… (it must be on)</string>
+    <string name="signal_strength">Signal %1$d dBm · %2$s</string>
+    <string name="very_close">very close</string>
+    <string name="near">near</string>
+    <string name="far">far</string>
+
+    <!-- Trip details -->
+    <string name="export_gpx">Export GPX</string>
+    <string name="gpx_saved">GPX saved</string>
+    <string name="export_failed">Export failed</string>
+    <string name="duration">Duration</string>
+    <string name="avg_speed">Avg speed</string>
+    <string name="max_speed">Max speed</string>
+    <string name="consumption">Consumption</string>
+    <string name="battery_used">Battery used</string>
+    <string name="points">Points</string>
+    <string name="speed">Speed</string>
+    <string name="battery_chart">Battery</string>
+    <string name="altitude">Altitude</string>
+    <string name="chart_max">%1$s · max %2$s</string>
+    <string name="delete_trip_q">Delete trip?</string>
+    <string name="delete_trip_text">The trip and its track are removed from this phone.</string>
+
+    <!-- Settings -->
+    <string name="language_system">System</string>
+    <string name="section_scooter">Scooter</string>
+    <string name="no_scooter">No scooter</string>
+    <string name="no_scooter_sub">Find yours, or import a pairing file</string>
+    <string name="other_scooter">Other…</string>
+    <string name="forget">Forget</string>
+    <string name="forget_q">Forget scooter?</string>
+    <string name="forget_text">Disconnects and stops reconnecting. Trips are kept.</string>
+    <string name="auto_reconnect">Reconnect automatically</string>
+    <string name="auto_reconnect_sub">When the app opens or the link drops</string>
+    <string name="auto_lock">Auto-lock</string>
+    <string name="auto_lock_sub">Lock when you walk away</string>
+    <string name="auto_lock_help">Locks the scooter once when it has stood still for 30 s and the Bluetooth signal gets weak. It never locks while the scooter moves, and the notification has an Unlock button. The signal varies with walls and pockets, so it can lock a bit early or late. It is not theft protection.</string>
+    <string name="auto_lock_distance">Lock at</string>
+    <string name="range_near">Near</string>
+    <string name="range_medium">Medium</string>
+    <string name="range_far">Far</string>
+
+    <string name="section_location">Location</string>
+    <string name="location_features">Location features</string>
+    <string name="location_off_sub">Off. No GPS, no map position, no tracks.</string>
+    <string name="location_on_sub">Trip tracks, map position and parking spot</string>
+    <string name="location_help">With this on, the app uses GPS while it is open or connected to draw trip tracks, show where you are and remember where you parked. It all stays on this phone. With it off, trips are still logged from the scooter\'s own odometer, without a map track.</string>
+    <string name="location_denied">Location permission was not given</string>
+    <string name="auto_record">Record trips automatically</string>
+    <string name="auto_record_sub">When you ride while connected</string>
+    <string name="auto_record_sub_no_location">When you ride while connected (distance only)</string>
+    <string name="idle_stop">End trip after standing still</string>
+    <string name="gps_interval">GPS interval</string>
+    <string name="park_on_lock">Save parking spot when locked</string>
+    <string name="park_on_lock_sub">Pins the scooter on the map until you unlock</string>
+    <string name="network_location">Wi‑Fi/cell position indoors</string>
+    <string name="network_location_sub">Map and parking spot only</string>
+    <string name="network_location_help">When GPS has no fix, the phone\'s own location service can stand in. That service may contact Google. Trip tracks always use GPS only.</string>
+
+    <string name="section_look">Units and look</string>
+    <string name="units">Units</string>
+    <string name="units_sub">In the app and on the scooter</string>
+    <string name="theme">Theme</string>
+    <string name="theme_system">System</string>
+    <string name="theme_light">Light</string>
+    <string name="theme_dark">Dark</string>
+    <string name="dynamic_color">Material You colours</string>
+    <string name="dynamic_color_sub">Colours from your wallpaper</string>
+    <string name="dark_map">Dark map</string>
+
+    <string name="section_maps">Offline maps</string>
+    <string name="maps_hint">Mapsforge .map files (OpenStreetMap)</string>
+    <string name="maps_help">Download a .map file for your region on a computer or in a browser, for example from download.mapsforge.org, and import it here. The app itself never goes online.</string>
+    <string name="import_map">Import .map file</string>
+    <string name="map_imported">Imported %1$s</string>
+    <string name="import_failed">Import failed</string>
+    <string name="delete_map_q">Delete %1$s?</string>
+
+    <string name="section_pairing">Pairing</string>
+    <string name="pairing_hint">Move this phone\'s pairing to another phone</string>
+    <string name="pairing_help">Your scooter only answers the phone it is paired with. The pairing file lets another phone of yours use the same pairing. Export it here, open it on the other phone with Import. Treat the file like a key.</string>
+    <string name="pairing_export">Export file</string>
+    <string name="pairing_import">Import file</string>
+    <string name="pairing_export_q">Export pairing file?</string>
+    <string name="pairing_export_warning">This file is the key to your scooter. Share it only with your own phones, and delete it once it is imported.</string>
+    <string name="pairing_export_go">Export</string>
+    <string name="pairing_saved">Pairing file saved</string>
+    <string name="pairing_invalid">Not a valid pairing file: %1$s</string>
+    <string name="pairing_import_q">Use this pairing?</string>
+    <string name="pairing_import_text">Scooter: %1$s\n\nThis phone will use the pairing from the file and stop using its own. Only import files from your own phones.</string>
+    <string name="pairing_import_go">Import</string>
+    <string name="pairing_imported">Pairing imported. Connecting…</string>
+
+    <string name="section_data">Your data</string>
+    <string name="data_hint">Trips and the parking spot stay on this phone. A backup is one file you can keep anywhere.</string>
+    <string name="backup_export">Export backup</string>
+    <string name="backup_restore">Restore</string>
+    <string name="backup_saved">Backup saved</string>
+    <string name="backup_failed">Backup failed: %1$s</string>
+    <string name="restore_q">Restore backup?</string>
+    <string name="restore_text">All trips on this phone are replaced by the backup. The app restarts afterwards.</string>
+    <string name="restore_failed">Restore failed</string>
+
+    <!-- About -->
+    <string name="about">About</string>
+    <string name="about_app">About Navee Offline</string>
+    <string name="about_sub">Licence, credits and disclaimer</string>
+    <string name="about_intro">An open-source app for NAVEE e-scooters. It talks to the scooter over Bluetooth and works fully offline: no account, no cloud, no analytics, no internet permission.</string>
+    <string name="about_licence">Licence</string>
+    <string name="about_licence_text">Free software under the GNU General Public License v3.0 or later. You can use, study, share and change it. Changed versions you share must keep the same licence.</string>
+    <string name="about_credits">Credits</string>
+    <string name="about_credits_maps">Map rendering: Mapsforge (LGPL-3.0). Map data © OpenStreetMap contributors, under the Open Database License (ODbL).</string>
+    <string name="about_credits_protocol">The Bluetooth protocol was documented by the nv-lb-edition project by Laufbursche. This app is an independent implementation and contains none of its code.</string>
+    <string name="about_disclaimer">Disclaimer</string>
+    <string name="about_disclaimer_text">An independent community project, not affiliated with or endorsed by NAVEE. \"NAVEE\" is a trademark of its owner, used only to say which scooters the app works with.</string>
+    <string name="about_warranty">No warranty. Changing scooter settings is at your own risk. Follow local traffic law. The app has no speed-limit removal, region changes or firmware flashing.</string>
+
+    <!-- Notifications -->
+    <string name="channel_link">Scooter connection</string>
+    <string name="channel_alerts">Scooter alerts</string>
+    <string name="notif_connected">%1$s connected</string>
+    <string name="notif_out_of_range">Scooter out of range, retrying…</string>
+    <string name="notif_recording">Recording trip</string>
+    <string name="notif_trip">Trip %1$s</string>
+    <string name="notif_auto_locked">Locked automatically</string>
+    <string name="notif_auto_locked_text">You walked away, so the scooter was locked.</string>
+
+    <!-- Time -->
+    <string name="duration_h_min">%1$d h %2$d min</string>
+    <string name="duration_min">%1$d min</string>
+    <string name="duration_s">%1$d s</string>
+    <string name="ago_now">just now</string>
+    <string name="ago_min">%1$d min ago</string>
+    <string name="ago_h">%1$d h ago</string>
+    <plurals name="ago_days">
+        <item quantity="one">%d day ago</item>
+        <item quantity="other">%d days ago</item>
+    </plurals>
+</resources>
