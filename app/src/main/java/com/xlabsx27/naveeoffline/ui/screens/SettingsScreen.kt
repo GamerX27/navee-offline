@@ -18,6 +18,7 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.filled.BluetoothSearching
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ElectricScooter
@@ -195,15 +196,16 @@ fun SettingsScreen(
                         status.isWanted -> OutlinedButton(onClick = { c.disconnect() }) { Text(stringResource(R.string.disconnect)) }
                         else -> OutlinedButton(onClick = { c.connect(address, s.lastName) }) { Text(stringResource(R.string.connect)) }
                     }
-                    if (address != null) {
-                        OutlinedButton(onClick = onConnect) { Text(stringResource(R.string.other_scooter)) }
-                        TextButton(onClick = { confirmForget = true }) { Text(stringResource(R.string.forget)) }
-                    }
+                    if (address != null) TextButton(onClick = { confirmForget = true }) { Text(stringResource(R.string.forget)) }
                 }
                 Divider()
                 LinkRow(stringResource(R.string.scooter_info), Icons.Filled.Info, onInfo)
                 Divider()
                 LinkRow(stringResource(R.string.all_controls), Icons.Filled.Tune, onControls)
+                if (address != null) {
+                    Divider()
+                    LinkRow(stringResource(R.string.other_scooter), Icons.AutoMirrored.Filled.BluetoothSearching, onConnect)
+                }
                 Divider()
                 SwitchRow(
                     stringResource(R.string.auto_reconnect), s.autoReconnect, { scope.launch { c.settingsStore.setAutoReconnect(it) } },

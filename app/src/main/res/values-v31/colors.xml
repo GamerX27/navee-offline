@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Lock widget in the wallpaper's colours: secondary container, tertiary container when locked. -->
+<resources>
+    <color name="widget_bg">@android:color/system_accent2_100</color>
+    <color name="widget_fg">@android:color/system_accent2_900</color>
+    <color name="widget_bg_locked">@android:color/system_accent3_100</color>
+    <color name="widget_fg_locked">@android:color/system_accent3_900</color>
+</resources>

@@ -3,4 +3,9 @@
     <color name="splash_bg">#FFFDF8F6</color>
     <color name="splash_bg_night">#FF101414</color>
     <color name="ic_bg">#FF00696E</color>
+    <!-- Lock widget, before Android 12's dynamic colours (values-v31). -->
+    <color name="widget_bg">#FFCCE8E9</color>
+    <color name="widget_fg">#FF051F21</color>
+    <color name="widget_bg_locked">#FFD5E3FF</color>
+    <color name="widget_fg_locked">#FF0B1C36</color>
 </resources>

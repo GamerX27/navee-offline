@@ -205,7 +205,7 @@
     <string name="section_scooter">Scooter</string>
     <string name="no_scooter">No scooter</string>
     <string name="no_scooter_sub">Find yours, or import a pairing file</string>
-    <string name="other_scooter">Other…</string>
+    <string name="other_scooter">Connect another scooter</string>
     <string name="forget">Forget</string>
     <string name="forget_q">Forget scooter?</string>
     <string name="forget_text">Disconnects and stops reconnecting. Trips are kept.</string>
@@ -315,4 +315,7 @@
         <item quantity="one">%d day ago</item>
         <item quantity="other">%d days ago</item>
     </plurals>
+    <string name="widget_lock_name">Lock / unlock</string>
+    <string name="widget_lock_desc">Lock or unlock the scooter with one tap</string>
+    <string name="widget_tap_connect">Tap to connect</string>
 </resources>
