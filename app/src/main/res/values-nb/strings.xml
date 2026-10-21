@@ -203,7 +203,7 @@
     <string name="section_scooter">Sparkesykkel</string>
     <string name="no_scooter">Ingen sparkesykkel</string>
     <string name="no_scooter_sub">Finn din, eller importer en paringsfil</string>
-    <string name="other_scooter">Annen …</string>
+    <string name="other_scooter">Koble til en annen sparkesykkel</string>
     <string name="forget">Glem</string>
     <string name="forget_q">Glemme sparkesykkelen?</string>
     <string name="forget_text">Kobler fra og slutter å koble til igjen. Turene beholdes.</string>
@@ -313,4 +313,7 @@
         <item quantity="one">for %d dag siden</item>
         <item quantity="other">for %d dager siden</item>
     </plurals>
+    <string name="widget_lock_name">Lås / lås opp</string>
+    <string name="widget_lock_desc">Lås eller lås opp sparkesykkelen med ett trykk</string>
+    <string name="widget_tap_connect">Trykk for å koble til</string>
 </resources>

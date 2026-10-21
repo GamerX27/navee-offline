@@ -19,12 +19,14 @@ import com.xlabsx27.naveeoffline.pairing.Pairing
 import com.xlabsx27.naveeoffline.protocol.Setting
 import com.xlabsx27.naveeoffline.service.ScooterService
 import com.xlabsx27.naveeoffline.service.TripRecorder
+import com.xlabsx27.naveeoffline.widget.LockWidget
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.stateIn
@@ -67,6 +69,12 @@ class AppContainer(private val context: Context) {
             connection.status.distinctUntilChangedBy { it.state }.collect { s ->
                 if (s.state == LinkState.CONNECTED && s.address != null) settingsStore.rememberDevice(s.address, s.name)
             }
+        }
+        // Keep the home-screen lock widget in step with the link and the lock state.
+        scope.launch {
+            combine(connection.status, connection.telemetry, settings) { s, t, a -> Triple(s.state, t.locked, a.lastAddress) }
+                .distinctUntilChanged()
+                .collect { LockWidget.render(context, this@AppContainer) }
         }
     }
 

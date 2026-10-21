@@ -19,6 +19,7 @@ Three tabs: **Ride**, **Map** and **Settings**. Norwegian (bokmål) and English,
   - range left, trip and odometer
 - Fault codes decoded against the NAVEE table, with texts in both languages. Unknown codes are shown raw, never guessed.
 - **Auto-lock** (opt-in): locks once when the scooter has stood still for 30 s and the Bluetooth signal shows you walked away (Near/Medium/Far). It never fires while moving, and the notification has an Unlock button.
+- **Home-screen widget**: one button that locks or unlocks. If the app isn't connected, it connects to the last scooter first. Like the Ride screen, it won't lock a moving scooter.
 - **Pairing file**: move this phone's pairing to another phone (Settings → Pairing). See [SECURITY.md](SECURITY.md).
 - Controls. Every switch shows what the scooter reports back, not what the app assumes:
   - cruise control, traction control, eco mode

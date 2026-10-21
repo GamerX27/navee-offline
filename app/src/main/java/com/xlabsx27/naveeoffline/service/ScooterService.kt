@@ -22,13 +22,17 @@ import com.xlabsx27.naveeoffline.protocol.Telemetry
 import com.xlabsx27.naveeoffline.ui.MainActivity
 import com.xlabsx27.naveeoffline.ui.Format
 import com.xlabsx27.naveeoffline.ui.Permissions
+import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.filterNotNull
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withTimeoutOrNull
 
 /**
  * Keeps the scooter link, GPS and trip recording alive with the screen off. Runs while a scooter is
@@ -39,6 +43,7 @@ class ScooterService : LifecycleService() {
     private val c by lazy { container }
     private var lastNotification: Notification? = null
     private val autoLock = AutoLock()
+    private var pendingToggle: Job? = null
 
     override fun onCreate() {
         super.onCreate()
@@ -135,10 +140,37 @@ class ScooterService : LifecycleService() {
                 c.write(Setting.LOCK, 0)
                 getSystemService(NotificationManager::class.java).cancel(AUTO_LOCK_NOTIFICATION_ID)
             }
+            ACTION_TOGGLE_LOCK -> toggleLock()
             ACTION_DISCONNECT -> c.disconnect()
             ACTION_STOP_RECORDING -> c.stopRecording()
         }
         return START_NOT_STICKY
+    }
+
+    /**
+     * The widget's one button. Connects to the remembered scooter if needed, waits until it reports
+     * its lock state, then flips it. Never locks a moving scooter.
+     */
+    private fun toggleLock() {
+        if (pendingToggle?.isActive == true) return
+        val conn = c.connection
+        if (!conn.status.value.isWanted) {
+            val s = c.settings.value
+            c.connect(s.lastAddress ?: return, s.lastName)
+        }
+        pendingToggle = lifecycleScope.launch {
+            val t = withTimeoutOrNull(TOGGLE_TIMEOUT_MS) {
+                combine(conn.status, conn.telemetry) { s, t -> t.takeIf { s.state == LinkState.CONNECTED && it.locked != null } }
+                    .filterNotNull()
+                    .first()
+            } ?: return@launch
+            if (t.locked == true) {
+                c.write(Setting.LOCK, 0)
+                getSystemService(NotificationManager::class.java).cancel(AUTO_LOCK_NOTIFICATION_ID)
+            } else if ((t.speedKmh ?: 0.0) <= 1.0) {
+                c.write(Setting.LOCK, 1)
+            }
+        }
     }
 
     private fun goForeground(n: Notification) {
@@ -227,6 +259,8 @@ class ScooterService : LifecycleService() {
         private const val ACTION_UNLOCK = "unlock"
         private const val ACTION_DISCONNECT = "disconnect"
         private const val ACTION_STOP_RECORDING = "stop_recording"
+        const val ACTION_TOGGLE_LOCK = "toggle_lock"
+        private const val TOGGLE_TIMEOUT_MS = 30_000L
 
         /** No-op without Bluetooth permission: the service could not go foreground then. */
         fun start(context: Context) {
