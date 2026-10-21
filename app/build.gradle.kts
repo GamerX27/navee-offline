@@ -17,6 +17,12 @@ android {
     }
 
     buildTypes {
+        // A separate app ("Navee Dev"), so a debug build installs next to the released one instead of
+        // clashing with it (different signing key) or replacing its data.
+        debug {
+            applicationIdSuffix = ".dev"
+            versionNameSuffix = "-dev"
+        }
         release {
             isMinifyEnabled = true
             isShrinkResources = true

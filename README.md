@@ -61,7 +61,7 @@ Requirements: JDK 21 and the Android SDK (platform 37, build-tools 36+).
 
 ```sh
 ./gradlew testDebugUnitTest   # protocol, pairing-file and auto-lock unit tests
-./gradlew assembleDebug       # app/build/outputs/apk/debug/app-debug.apk
+./gradlew assembleDebug       # "Navee Dev" (….dev), installs next to the released app
 ./gradlew assembleRelease     # minified, unsigned
 ```
 
