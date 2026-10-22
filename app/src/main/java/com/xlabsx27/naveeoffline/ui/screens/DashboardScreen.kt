@@ -64,6 +64,7 @@ import com.xlabsx27.naveeoffline.data.Trip
 import com.xlabsx27.naveeoffline.data.Units
 import com.xlabsx27.naveeoffline.location.isGps
 import com.xlabsx27.naveeoffline.protocol.DriveMode
+import com.xlabsx27.naveeoffline.protocol.Feature
 import com.xlabsx27.naveeoffline.protocol.NaveeModels
 import com.xlabsx27.naveeoffline.protocol.Setting
 import com.xlabsx27.naveeoffline.protocol.Telemetry
@@ -75,6 +76,7 @@ import com.xlabsx27.naveeoffline.ui.components.TileRow
 import com.xlabsx27.naveeoffline.ui.components.rememberOptimisticSettings
 import com.xlabsx27.naveeoffline.ui.faultText
 import com.xlabsx27.naveeoffline.ui.theme.StatusColors
+import kotlinx.coroutines.flow.emptyFlow
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -91,13 +93,14 @@ fun DashboardScreen(
     val t by c.connection.telemetry.collectAsStateWithLifecycle()
     val settings by c.settings.collectAsStateWithLifecycle()
     val trip by c.recorder.active.collectAsStateWithLifecycle()
+    val connected = status.state == LinkState.CONNECTED
     // Some models (e.g. E45 Pro) never push their speed; a fresh GPS fix stands in, but only with
-    // location features on (otherwise GpsSource emits nothing).
-    val fix by c.gps.fixes.collectAsStateWithLifecycle(initialValue = null)
+    // location features on (otherwise GpsSource emits nothing) and while connected.
+    val fixes = remember(connected) { if (connected) c.gps.fixes else emptyFlow() }
+    val fix by fixes.collectAsStateWithLifecycle(initialValue = null)
     val gpsKmh = fix?.takeIf { settings.locationEnabled && it.isGps && it.hasSpeed() && System.currentTimeMillis() - it.time < 5_000 }
         ?.let { it.speed * 3.6 }
     val units = settings.units
-    val connected = status.state == LinkState.CONNECTED
 
     Scaffold(
         topBar = {
@@ -143,7 +146,7 @@ fun DashboardScreen(
                     StatTile(stringResource(R.string.odometer), Format.km(t.odometerKm, units, 0), Modifier.weight(1f))
                 }
             } else if (granted) {
-                NotConnectedCard(c, status, settings.lastAddress, settings.lastName, onConnect)
+                NotConnectedCard(c, status, settings.lastAddress, settings.lastName, settings.sleepingSince, onConnect)
             }
 
             if (settings.locationEnabled) {
@@ -188,19 +191,25 @@ private fun Banner(text: String, icon: ImageVector? = null) {
 }
 
 @Composable
-private fun NotConnectedCard(c: AppContainer, status: LinkStatus, lastAddress: String?, lastName: String?, onConnect: () -> Unit) {
+private fun NotConnectedCard(
+    c: AppContainer,
+    status: LinkStatus,
+    lastAddress: String?,
+    lastName: String?,
+    sleepingSince: Long?,
+    onConnect: () -> Unit,
+) {
     Card(Modifier.fillMaxWidth()) {
         Column(Modifier.padding(20.dp), verticalArrangement = Arrangement.spacedBy(12.dp)) {
             val busy = status.isWanted
             Text(
-                stringResource(
-                    when {
-                        status.state == LinkState.RECONNECTING -> R.string.ride_out_of_range
-                        busy -> R.string.connecting
-                        lastAddress == null -> R.string.ride_no_scooter
-                        else -> R.string.not_connected
-                    },
-                ),
+                when {
+                    status.state == LinkState.RECONNECTING -> stringResource(R.string.ride_out_of_range)
+                    busy -> stringResource(R.string.connecting)
+                    lastAddress == null -> stringResource(R.string.ride_no_scooter)
+                    sleepingSince != null -> stringResource(R.string.locked_since, Format.time(sleepingSince))
+                    else -> stringResource(R.string.not_connected)
+                },
                 style = MaterialTheme.typography.titleLarge,
             )
             when {
@@ -291,7 +300,7 @@ private fun QuickToggles(o: OptimisticSettings, t: Telemetry) {
         QuickChip(stringResource(R.string.chip_light), Icons.Filled.FlashlightOn, o.on(Setting.AUTO_LIGHT, t.autoLight)) {
             o.send(Setting.AUTO_LIGHT, if (it) 1 else 0)
         }
-        if (NaveeModels.hasCruise(t.pid)) {
+        if (NaveeModels.supports(t.pid, Feature.CRUISE)) {
             QuickChip(stringResource(R.string.cruise), Icons.Filled.Speed, o.on(Setting.CRUISE, t.cruise)) {
                 o.send(Setting.CRUISE, if (it) 1 else 0)
             }
@@ -299,8 +308,10 @@ private fun QuickToggles(o: OptimisticSettings, t: Telemetry) {
         QuickChip(stringResource(R.string.mode_turbo), Icons.Filled.Whatshot, o.value(Setting.DRIVE_MODE, t.driveMode) == DriveMode.TURBO) {
             o.send(Setting.DRIVE_MODE, if (it) DriveMode.TURBO else DriveMode.NORMAL)
         }
-        QuickChip(stringResource(R.string.eco), Icons.Filled.Eco, o.on(Setting.ECO, t.eco)) {
-            o.send(Setting.ECO, if (it) 1 else 0)
+        if (NaveeModels.supports(t.pid, Feature.ECO)) {
+            QuickChip(stringResource(R.string.eco), Icons.Filled.Eco, o.on(Setting.ECO, t.eco)) {
+                o.send(Setting.ECO, if (it) 1 else 0)
+            }
         }
     }
 }

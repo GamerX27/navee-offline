@@ -12,6 +12,7 @@ import com.xlabsx27.naveeoffline.R
 import com.xlabsx27.naveeoffline.ble.LinkState
 import com.xlabsx27.naveeoffline.container
 import com.xlabsx27.naveeoffline.service.ScooterService
+import com.xlabsx27.naveeoffline.ui.Format
 import com.xlabsx27.naveeoffline.ui.MainActivity
 import com.xlabsx27.naveeoffline.ui.Permissions
 
@@ -31,7 +32,10 @@ class LockWidget : AppWidgetProvider() {
             if (manager.getAppWidgetIds(component).isEmpty()) return
 
             val s = c.connection.status.value
+            // Disconnected by lock sleep: the scooter was locked when the app let go of it.
+            val sleepingSince = c.settings.value.sleepingSince.takeIf { !s.isWanted }
             val locked = c.connection.telemetry.value.locked.takeIf { s.state == LinkState.CONNECTED }
+                ?: true.takeIf { sleepingSince != null }
             val views = RemoteViews(context.packageName, if (locked == true) R.layout.widget_lock_locked else R.layout.widget_lock)
             views.setImageViewResource(
                 R.id.widget_icon,
@@ -43,14 +47,13 @@ class LockWidget : AppWidgetProvider() {
             )
             views.setTextViewText(
                 R.id.widget_label,
-                context.getString(
-                    when {
-                        locked == true -> R.string.locked
-                        locked == false -> R.string.unlocked
-                        s.isWanted -> R.string.connecting
-                        else -> R.string.widget_tap_connect
-                    },
-                ),
+                when {
+                    sleepingSince != null -> context.getString(R.string.locked_since, Format.time(sleepingSince))
+                    locked == true -> context.getString(R.string.locked)
+                    locked == false -> context.getString(R.string.unlocked)
+                    s.isWanted -> context.getString(R.string.connecting)
+                    else -> context.getString(R.string.widget_tap_connect)
+                },
             )
 
             // The service can only go foreground with Bluetooth permission and needs a scooter to reach.

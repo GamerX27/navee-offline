@@ -19,6 +19,7 @@ Three tabs: **Ride**, **Map** and **Settings**. Norwegian (bokmål) and English,
   - range left, trip and odometer
 - Fault codes decoded against the NAVEE table, with texts in both languages. Unknown codes are shown raw, never guessed.
 - **Auto-lock** (opt-in): locks once when the scooter has stood still for 30 s and the Bluetooth signal shows you walked away (Near/Medium/Far). It never fires while moving, and the notification has an Unlock button.
+- **Disconnect when parked** (on by default): once the scooter has been locked for 2/5/10/30 min, the app disconnects and shows "Locked since …" on the Ride screen and the widget. It does not reconnect by itself, not even when you open the app, until you tap Connect or the widget.
 - **Home-screen widget**: one button that locks or unlocks. If the app isn't connected, it connects to the last scooter first. Like the Ride screen, it won't lock a moving scooter.
 - **Pairing file**: move this phone's pairing to another phone (Settings → Pairing). See [SECURITY.md](SECURITY.md).
 - Controls. Every switch shows what the scooter reports back, not what the app assumes:
@@ -26,12 +27,15 @@ Three tabs: **Ride**, **Map** and **Settings**. Norwegian (bokmål) and English,
   - drive mode (Normal/Turbo) and kick-start speed (region-aware)
   - lights: automatic headlight, daytime running light, tail, logo and ambient
   - km/h or mph on the scooter's display
+  - controls a model is known to lack are hidden once it is detected (on an E45 Pro: cruise, traction control, eco, kick-start, DRL, logo and ambient light)
 - Scooter info: voltage, current, power, temperature, SOH, cycles, serial, detected model, region, five firmware versions.
 - A foreground service with a notification and Lock/Unlock, Stop trip and Disconnect actions keeps the link alive with the screen off.
 
 **Trips and maps (offline)**
 - **Location features are off by default.** Without them, trips are still logged from the scooter's odometer, with no track and no location permission. Turn them on in Settings → Location for tracks, the map position and the parking spot.
 - Trips start automatically when you ride while connected, or you can record by hand.
+- A trip ends when you lock the scooter, or 3 min after the link drops. An automatic trip also ends after standing still for the set time. A trip recorded by hand ignores standing still.
+- GPS only runs while the scooter is connected or a trip is still open, plus while the Map screen is open.
 - Each trip stores:
   - distance, moving time, average and maximum speed
   - **energy used (Wh) and Wh/km**, from the pack voltage and current
@@ -60,7 +64,7 @@ You can import several regions. Without a map, trips still record, and the track
 Requirements: JDK 21 and the Android SDK (platform 37, build-tools 36+).
 
 ```sh
-./gradlew testDebugUnitTest   # protocol, pairing-file and auto-lock unit tests
+./gradlew testDebugUnitTest   # protocol, model, pairing-file, auto-lock and lock-sleep unit tests
 ./gradlew assembleDebug       # "Navee Dev" (….dev), installs next to the released app
 ./gradlew assembleRelease     # minified, unsigned
 ```

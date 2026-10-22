@@ -78,12 +78,12 @@ fun AppNav(c: AppContainer) {
         }
     }
 
-    // Reconnect to the remembered scooter when the app opens.
+    // Reconnect to the remembered scooter when the app opens, unless lock sleep let go of it.
     LaunchedEffect(permissionTick) {
         if (!Permissions.bluetoothGranted(context)) return@LaunchedEffect
         val s = c.settingsStore.settings.first()
         val address = s.lastAddress ?: return@LaunchedEffect
-        if (s.autoReconnect && c.connection.status.value.state == LinkState.IDLE && c.scanner.isEnabled) {
+        if (s.autoReconnect && s.sleepingSince == null && c.connection.status.value.state == LinkState.IDLE && c.scanner.isEnabled) {
             c.connect(address, s.lastName)
         }
     }

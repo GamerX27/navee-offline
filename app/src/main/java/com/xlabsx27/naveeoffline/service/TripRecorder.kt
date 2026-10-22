@@ -37,6 +37,8 @@ class TripRecorder(private val db: AppDatabase, private val scope: CoroutineScop
     private var lastMovementAt = 0L
     private var lastTelemetryAt = 0L
     private var disconnectedSince: Long? = null
+    /** The scooter reported unlocked during this trip, so a later lock means the ride is over. */
+    private var seenUnlocked = false
 
     init {
         // A process death mid-ride leaves a trip open; close it at its last point.
@@ -62,6 +64,7 @@ class TripRecorder(private val db: AppDatabase, private val scope: CoroutineScop
         lastMovementAt = now
         lastTelemetryAt = 0L
         disconnectedSince = null
+        seenUnlocked = telemetry.locked == false
         _livePath.value = emptyList()
         _active.value = trip.copy(id = dao.insert(trip))
     }
@@ -141,15 +144,20 @@ class TripRecorder(private val db: AppDatabase, private val scope: CoroutineScop
         }
     }
 
-    /** Periodic check for the automatic stop conditions. */
+    /**
+     * Periodic check for the automatic stop conditions. Locking the scooter or losing it for a few
+     * minutes ends any trip; standing still only ends automatic ones (a manual trip may wait at a
+     * red light for as long as it likes).
+     */
     fun tick(linkConnected: Boolean, idleStopMinutes: Int, telemetry: Telemetry) = scope.launch(serial) {
         if (_active.value == null) return@launch
         val now = System.currentTimeMillis()
         disconnectedSince = if (linkConnected) null else disconnectedSince ?: now
-        if (manual) return@launch
         val lostLink = disconnectedSince?.let { now - it > LINK_LOSS_STOP_MS } == true
-        val idle = now - lastMovementAt > idleStopMinutes * 60_000L
-        if (lostLink || idle) finish(telemetry)
+        if (linkConnected && telemetry.locked == false) seenUnlocked = true
+        val locked = seenUnlocked && linkConnected && telemetry.locked == true
+        val idle = !manual && now - lastMovementAt > idleStopMinutes * 60_000L
+        if (lostLink || locked || idle) finish(telemetry)
     }
 
     private suspend fun finish(telemetry: Telemetry?) {

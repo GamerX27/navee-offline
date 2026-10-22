@@ -1,5 +1,8 @@
 package com.xlabsx27.naveeoffline.protocol
 
+/** Controls that only some models have. */
+enum class Feature { CRUISE, ZERO_START, TCS, ECO, AMBIENT_LIGHT, LOGO_LIGHT, DRL }
+
 /** Model detection from the product id embedded in the serial number. */
 object NaveeModels {
     private val NAMES = mapOf(
@@ -26,11 +29,22 @@ object NaveeModels {
         "2322", "2329", "2334", "2417", "2422", "2435", "2436", "2437", "2438", "2515", "2768",
     )
 
+    /** Confirmed by an owner on an E45 Pro: these controls do nothing on it. */
+    private val E45_PRO_LACKS = setOf(
+        Feature.CRUISE, Feature.ZERO_START, Feature.TCS, Feature.ECO,
+        Feature.AMBIENT_LIGHT, Feature.LOGO_LIGHT, Feature.DRL,
+    )
+
+    private val UNSUPPORTED: Map<String, Set<Feature>> = buildMap<String, MutableSet<Feature>> {
+        NO_CRUISE.forEach { getOrPut(it) { mutableSetOf() } += Feature.CRUISE }
+        NO_ZERO_START.forEach { getOrPut(it) { mutableSetOf() } += Feature.ZERO_START }
+        listOf("2611", "2753").forEach { getOrPut(it) { mutableSetOf() } += E45_PRO_LACKS }
+    }
+
     fun name(pid: String?): String? = pid?.let(NAMES::get)
 
     /** Unknown models get every control: the scooter simply ignores what it does not support. */
-    fun hasCruise(pid: String?) = pid !in NO_CRUISE
-    fun hasZeroStart(pid: String?) = pid !in NO_ZERO_START
+    fun supports(pid: String?, feature: Feature) = UNSUPPORTED[pid]?.contains(feature) != true
 
     /**
      * Allowed kick-start levels. US-region meters accept 0..5; everywhere else the meter clamps

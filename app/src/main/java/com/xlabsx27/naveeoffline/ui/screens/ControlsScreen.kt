@@ -38,6 +38,7 @@ import com.xlabsx27.naveeoffline.AppContainer
 import com.xlabsx27.naveeoffline.R
 import com.xlabsx27.naveeoffline.ble.LinkState
 import com.xlabsx27.naveeoffline.protocol.DriveMode
+import com.xlabsx27.naveeoffline.protocol.Feature
 import com.xlabsx27.naveeoffline.protocol.NaveeModels
 import com.xlabsx27.naveeoffline.protocol.Setting
 import com.xlabsx27.naveeoffline.protocol.Telemetry
@@ -83,7 +84,7 @@ fun ControlsScreen(c: AppContainer, onConnect: () -> Unit, onBack: () -> Unit) {
                 )
                 Divider()
                 DriveModeRow(o.value(Setting.DRIVE_MODE, t.driveMode), connected) { o.send(Setting.DRIVE_MODE, it) }
-                if (NaveeModels.hasCruise(t.pid)) {
+                if (NaveeModels.supports(t.pid, Feature.CRUISE)) {
                     Divider()
                     SwitchRow(
                         stringResource(R.string.cruise),
@@ -94,25 +95,29 @@ fun ControlsScreen(c: AppContainer, onConnect: () -> Unit, onBack: () -> Unit) {
                         icon = Icons.Filled.Speed,
                     )
                 }
-                Divider()
-                SwitchRow(
-                    stringResource(R.string.tcs),
-                    o.on(Setting.TCS, t.tcs),
-                    toggle(Setting.TCS),
-                    help = stringResource(R.string.tcs_help),
-                    enabled = connected,
-                    icon = Icons.AutoMirrored.Filled.DirectionsBike,
-                )
-                Divider()
-                SwitchRow(
-                    stringResource(R.string.eco),
-                    o.on(Setting.ECO, t.eco),
-                    toggle(Setting.ECO),
-                    help = stringResource(R.string.eco_help),
-                    enabled = connected,
-                    icon = Icons.Filled.Eco,
-                )
-                if (NaveeModels.hasZeroStart(t.pid)) {
+                if (NaveeModels.supports(t.pid, Feature.TCS)) {
+                    Divider()
+                    SwitchRow(
+                        stringResource(R.string.tcs),
+                        o.on(Setting.TCS, t.tcs),
+                        toggle(Setting.TCS),
+                        help = stringResource(R.string.tcs_help),
+                        enabled = connected,
+                        icon = Icons.AutoMirrored.Filled.DirectionsBike,
+                    )
+                }
+                if (NaveeModels.supports(t.pid, Feature.ECO)) {
+                    Divider()
+                    SwitchRow(
+                        stringResource(R.string.eco),
+                        o.on(Setting.ECO, t.eco),
+                        toggle(Setting.ECO),
+                        help = stringResource(R.string.eco_help),
+                        enabled = connected,
+                        icon = Icons.Filled.Eco,
+                    )
+                }
+                if (NaveeModels.supports(t.pid, Feature.ZERO_START)) {
                     Divider()
                     KickStartRow(t, o.value(Setting.ZERO_START, t.startSpeed), connected) { o.send(Setting.ZERO_START, it) }
                 }
@@ -123,26 +128,32 @@ fun ControlsScreen(c: AppContainer, onConnect: () -> Unit, onBack: () -> Unit) {
                     stringResource(R.string.auto_light), o.on(Setting.AUTO_LIGHT, t.autoLight), toggle(Setting.AUTO_LIGHT),
                     subtitle = stringResource(R.string.auto_light_sub), enabled = connected, icon = Icons.Filled.FlashlightOn,
                 )
-                Divider()
-                SwitchRow(
-                    stringResource(R.string.drl), o.on(Setting.DRL, t.drl), toggle(Setting.DRL),
-                    enabled = connected, icon = Icons.Filled.Brightness5,
-                )
+                if (NaveeModels.supports(t.pid, Feature.DRL)) {
+                    Divider()
+                    SwitchRow(
+                        stringResource(R.string.drl), o.on(Setting.DRL, t.drl), toggle(Setting.DRL),
+                        enabled = connected, icon = Icons.Filled.Brightness5,
+                    )
+                }
                 Divider()
                 SwitchRow(
                     stringResource(R.string.tail_light), o.on(Setting.TAIL_LIGHT, t.tailLight), toggle(Setting.TAIL_LIGHT),
                     enabled = connected, icon = Icons.Filled.Highlight,
                 )
-                Divider()
-                SwitchRow(
-                    stringResource(R.string.logo_light), o.on(Setting.LOGO_LIGHT, t.logoLight), toggle(Setting.LOGO_LIGHT),
-                    enabled = connected, icon = Icons.Filled.EmojiObjects,
-                )
-                Divider()
-                SwitchRow(
-                    stringResource(R.string.ambient_light), o.on(Setting.AMBIENT_LIGHT, t.ambientLight), toggle(Setting.AMBIENT_LIGHT),
-                    subtitle = stringResource(R.string.ambient_light_sub), enabled = connected, icon = Icons.Filled.WbTwilight,
-                )
+                if (NaveeModels.supports(t.pid, Feature.LOGO_LIGHT)) {
+                    Divider()
+                    SwitchRow(
+                        stringResource(R.string.logo_light), o.on(Setting.LOGO_LIGHT, t.logoLight), toggle(Setting.LOGO_LIGHT),
+                        enabled = connected, icon = Icons.Filled.EmojiObjects,
+                    )
+                }
+                if (NaveeModels.supports(t.pid, Feature.AMBIENT_LIGHT)) {
+                    Divider()
+                    SwitchRow(
+                        stringResource(R.string.ambient_light), o.on(Setting.AMBIENT_LIGHT, t.ambientLight), toggle(Setting.AMBIENT_LIGHT),
+                        subtitle = stringResource(R.string.ambient_light_sub), enabled = connected, icon = Icons.Filled.WbTwilight,
+                    )
+                }
             }
 
             Spacer(Modifier.height(24.dp))

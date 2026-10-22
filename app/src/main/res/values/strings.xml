@@ -215,6 +215,11 @@
     <string name="auto_lock_sub">Lock when you walk away</string>
     <string name="auto_lock_help">Locks the scooter once when it has stood still for 30 s and the Bluetooth signal gets weak. It never locks while the scooter moves, and the notification has an Unlock button. The signal varies with walls and pockets, so it can lock a bit early or late. It is not theft protection.</string>
     <string name="auto_lock_distance">Lock at</string>
+    <string name="lock_sleep">Disconnect when parked</string>
+    <string name="lock_sleep_sub">Let go of a locked scooter after a while</string>
+    <string name="lock_sleep_help">Once the scooter has been locked for the chosen time, the app disconnects and shows when it was locked. It does not connect again by itself, not even when you open the app. Tap Connect or the widget when you want to ride. This saves the phone\'s battery and GPS while the scooter is parked.</string>
+    <string name="lock_sleep_after">Disconnect after</string>
+    <string name="locked_since">Locked since %1$s</string>
     <string name="range_near">Near</string>
     <string name="range_medium">Medium</string>
     <string name="range_far">Far</string>

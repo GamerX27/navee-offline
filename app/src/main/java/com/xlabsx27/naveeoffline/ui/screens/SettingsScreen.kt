@@ -20,6 +20,7 @@ import androidx.compose.foundation.verticalScroll
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.filled.BluetoothSearching
 import androidx.compose.material.icons.automirrored.filled.KeyboardArrowRight
+import androidx.compose.material.icons.filled.BluetoothDisabled
 import androidx.compose.material.icons.filled.Delete
 import androidx.compose.material.icons.filled.ElectricScooter
 import androidx.compose.material.icons.filled.Info
@@ -228,6 +229,20 @@ fun SettingsScreen(
                         ),
                         s.autoLockRange,
                     ) { scope.launch { c.settingsStore.setAutoLockRange(it) } }
+                }
+                Divider()
+                SwitchRow(
+                    stringResource(R.string.lock_sleep), s.lockSleep, { scope.launch { c.settingsStore.setLockSleep(it) } },
+                    subtitle = stringResource(R.string.lock_sleep_sub),
+                    help = stringResource(R.string.lock_sleep_help),
+                    icon = Icons.Filled.BluetoothDisabled,
+                )
+                if (s.lockSleep) {
+                    Choice(
+                        stringResource(R.string.lock_sleep_after),
+                        listOf(2 to "2 min", 5 to "5 min", 10 to "10 min", 30 to "30 min"),
+                        s.lockSleepMinutes,
+                    ) { scope.launch { c.settingsStore.setLockSleepMinutes(it) } }
                 }
             }
 

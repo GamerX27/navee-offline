@@ -22,14 +22,17 @@ import com.xlabsx27.naveeoffline.protocol.Telemetry
 import com.xlabsx27.naveeoffline.ui.MainActivity
 import com.xlabsx27.naveeoffline.ui.Format
 import com.xlabsx27.naveeoffline.ui.Permissions
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.flow.conflate
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.drop
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withTimeoutOrNull
@@ -43,24 +46,30 @@ class ScooterService : LifecycleService() {
     private val c by lazy { container }
     private var lastNotification: Notification? = null
     private val autoLock = AutoLock()
+    private val lockSleep = LockSleep()
     private var pendingToggle: Job? = null
 
+    @OptIn(ExperimentalCoroutinesApi::class)
     override fun onCreate() {
         super.onCreate()
         createChannel()
 
         val conn = c.connection
         val parking = ParkingTracker(c)
-        // GpsSource emits nothing while location features are off, so no GPS is registered then.
+        // GPS runs only while the scooter is connected, or while a trip is still open (it ends a few
+        // minutes after the link drops). GpsSource also emits nothing while location features are off.
         lifecycleScope.launch {
-            c.gps.fixes.collect { fix ->
-                parking.onFix(fix)
-                val t = conn.telemetry.value
-                if (conn.status.value.state == LinkState.CONNECTED && c.settings.value.autoRecord) {
-                    c.recorder.maybeAutoStart(t, if (fix.hasSpeed()) fix.speed else null, conn.status.value.name)
+            combine(conn.status, c.recorder.active) { s, trip -> s.isConnected || trip != null }
+                .distinctUntilChanged()
+                .flatMapLatest { on -> if (on) c.gps.fixes else emptyFlow() }
+                .collect { fix ->
+                    parking.onFix(fix)
+                    val t = conn.telemetry.value
+                    if (conn.status.value.state == LinkState.CONNECTED && c.settings.value.autoRecord) {
+                        c.recorder.maybeAutoStart(t, if (fix.hasSpeed()) fix.speed else null, conn.status.value.name)
+                    }
+                    c.recorder.onFix(fix, t)
                 }
-                c.recorder.onFix(fix, t)
-            }
         }
         lifecycleScope.launch {
             conn.telemetry.collect { t ->
@@ -100,7 +109,21 @@ class ScooterService : LifecycleService() {
         lifecycleScope.launch {
             while (true) {
                 delay(10_000)
-                c.recorder.tick(conn.status.value.isConnected, c.settings.value.idleStopMinutes, conn.telemetry.value)
+                val s = c.settings.value
+                val t = conn.telemetry.value
+                c.recorder.tick(conn.status.value.isConnected, s.idleStopMinutes, t)
+                val sleep = lockSleep.update(
+                    enabled = s.lockSleep,
+                    connected = conn.status.value.state == LinkState.CONNECTED,
+                    locked = t.locked,
+                    afterMs = s.lockSleepMinutes * 60_000L,
+                    now = System.currentTimeMillis(),
+                )
+                if (sleep) {
+                    Log.i(TAG, "lock sleep: locked for ${s.lockSleepMinutes} min, disconnecting")
+                    c.settingsStore.setSleepingSince(lockSleep.lockedSince)
+                    c.disconnect()
+                }
             }
         }
         lifecycleScope.launch {

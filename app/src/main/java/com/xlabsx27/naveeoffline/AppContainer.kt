@@ -72,13 +72,15 @@ class AppContainer(private val context: Context) {
         }
         // Keep the home-screen lock widget in step with the link and the lock state.
         scope.launch {
-            combine(connection.status, connection.telemetry, settings) { s, t, a -> Triple(s.state, t.locked, a.lastAddress) }
+            combine(connection.status, connection.telemetry, settings) { s, t, a -> listOf(s.state, t.locked, a.lastAddress, a.sleepingSince) }
                 .distinctUntilChanged()
                 .collect { LockWidget.render(context, this@AppContainer) }
         }
     }
 
+    /** While lock sleep holds, only the user connects (the reconnect on open skips it), so this ends it. */
     fun connect(address: String, name: String?) {
+        scope.launch { settingsStore.setSleepingSince(null) }
         connection.connect(address, name)
         ScooterService.start(context)
     }

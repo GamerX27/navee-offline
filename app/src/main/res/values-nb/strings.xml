@@ -213,6 +213,11 @@
     <string name="auto_lock_sub">Lås når du går fra den</string>
     <string name="auto_lock_help">Låser sparkesykkelen én gang når den har stått stille i 30 s og Bluetooth-signalet blir svakt. Den låser aldri mens sparkesykkelen er i bevegelse, og varselet har en Lås opp-knapp. Signalet varierer med vegger og lommer, så den kan låse litt tidlig eller sent. Det er ikke tyverisikring.</string>
     <string name="auto_lock_distance">Lås ved</string>
+    <string name="lock_sleep">Koble fra når parkert</string>
+    <string name="lock_sleep_sub">Slipp en låst sparkesykkel etter en stund</string>
+    <string name="lock_sleep_help">Når sparkesykkelen har vært låst i den valgte tiden, kobler appen fra og viser når den ble låst. Den kobler ikke til igjen av seg selv, heller ikke når du åpner appen. Trykk Koble til eller på widgeten når du vil kjøre. Det sparer telefonens batteri og GPS mens sparkesykkelen står parkert.</string>
+    <string name="lock_sleep_after">Koble fra etter</string>
+    <string name="locked_since">Låst siden %1$s</string>
     <string name="range_near">Nær</string>
     <string name="range_medium">Middels</string>
     <string name="range_far">Langt</string>

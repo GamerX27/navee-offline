@@ -5,6 +5,7 @@ import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
 import androidx.datastore.preferences.core.intPreferencesKey
+import androidx.datastore.preferences.core.longPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import com.xlabsx27.naveeoffline.service.AutoLockRange
@@ -31,6 +32,11 @@ data class AppSettings(
     val showAllDevices: Boolean = false,
     val autoLock: Boolean = false,
     val autoLockRange: AutoLockRange = AutoLockRange.MEDIUM,
+    /** Disconnect once the scooter has been locked this long, and stay away until connected by hand. */
+    val lockSleep: Boolean = true,
+    val lockSleepMinutes: Int = 10,
+    /** When the scooter was locked, if the app disconnected because of [lockSleep]; cleared on connect. */
+    val sleepingSince: Long? = null,
     val lastAddress: String? = null,
     val lastName: String? = null,
 )
@@ -53,6 +59,9 @@ class SettingsStore(private val context: Context) {
         val SHOW_ALL = booleanPreferencesKey("show_all_devices")
         val AUTO_LOCK = booleanPreferencesKey("auto_lock")
         val AUTO_LOCK_RANGE = stringPreferencesKey("auto_lock_range")
+        val LOCK_SLEEP = booleanPreferencesKey("lock_sleep")
+        val LOCK_SLEEP_MIN = intPreferencesKey("lock_sleep_min")
+        val SLEEPING_SINCE = longPreferencesKey("sleeping_since")
         val LAST_ADDRESS = stringPreferencesKey("last_address")
         val LAST_NAME = stringPreferencesKey("last_name")
     }
@@ -74,6 +83,9 @@ class SettingsStore(private val context: Context) {
             autoLock = p[K.AUTO_LOCK] ?: false,
             autoLockRange = p[K.AUTO_LOCK_RANGE]?.let { runCatching { AutoLockRange.valueOf(it) }.getOrNull() }
                 ?: AutoLockRange.MEDIUM,
+            lockSleep = p[K.LOCK_SLEEP] ?: true,
+            lockSleepMinutes = p[K.LOCK_SLEEP_MIN] ?: 10,
+            sleepingSince = p[K.SLEEPING_SINCE],
             lastAddress = p[K.LAST_ADDRESS],
             lastName = p[K.LAST_NAME],
         )
@@ -97,6 +109,11 @@ class SettingsStore(private val context: Context) {
     suspend fun setShowAllDevices(v: Boolean) = set(K.SHOW_ALL, v)
     suspend fun setAutoLock(v: Boolean) = set(K.AUTO_LOCK, v)
     suspend fun setAutoLockRange(v: AutoLockRange) = set(K.AUTO_LOCK_RANGE, v.name)
+    suspend fun setLockSleep(v: Boolean) = set(K.LOCK_SLEEP, v)
+    suspend fun setLockSleepMinutes(v: Int) = set(K.LOCK_SLEEP_MIN, v)
+    suspend fun setSleepingSince(v: Long?) = context.dataStore.edit {
+        if (v == null) it.remove(K.SLEEPING_SINCE) else it[K.SLEEPING_SINCE] = v
+    }
 
     suspend fun rememberDevice(address: String, name: String?) = context.dataStore.edit {
         it[K.LAST_ADDRESS] = address
@@ -106,5 +123,6 @@ class SettingsStore(private val context: Context) {
     suspend fun forgetDevice() = context.dataStore.edit {
         it.remove(K.LAST_ADDRESS)
         it.remove(K.LAST_NAME)
+        it.remove(K.SLEEPING_SINCE)
     }
 }
